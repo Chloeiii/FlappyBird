@@ -3,7 +3,7 @@
 A Flappy Bird made using JavaScript
 
 ----
-### [Click to Play online](https://chloeiii.github.io/web-game/) 
+### [Click to Play online](https://chloeiii.github.io/FlappyBird/) 
 
 ----
 ### Tutorials

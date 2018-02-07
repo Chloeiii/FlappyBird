@@ -1,10 +1,29 @@
 # Flappy Bird  :angel:
-### Play online: [https://chloeiii.github.io/web-game/](https://chloeiii.github.io/web-game/) 
+
+----
+A Flappy Bird made using JavaScript
+
+----
+###[Play online](https://chloeiii.github.io/web-game/) 
 
 ----
 ### Tutorials
 * [HTML Game Tutorial](https://www.w3schools.com/graphics/game_intro.asp)
 * [Canvas Tutorial](https://www.w3schools.com/graphics/canvas_intro.asp)
+
+----
+### Screenshot
+* TBD
+
+----
+### TODO
+- [ ] add start buttom
+- [ ] add sound
+- [ ] instruction/tutorial
+- [ ] redesign obstacles
+- [ ] gameover scorecard
+- [ ] redesign score
+- [ ] play with mouse 
 
 ----
 ### Notes
@@ -23,5 +42,4 @@
 			console.log(Math.floor(-5.05));
 			// expected output: -6
 
-### TODO
-sound
+

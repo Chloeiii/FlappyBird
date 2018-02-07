@@ -1,6 +1,5 @@
 # Flappy Bird  :angel:
 
-----
 A Flappy Bird made using JavaScript
 
 ----

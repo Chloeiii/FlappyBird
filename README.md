@@ -4,7 +4,7 @@
 A Flappy Bird made using JavaScript
 
 ----
-###[Play online](https://chloeiii.github.io/web-game/) 
+### [Click to Play online](https://chloeiii.github.io/web-game/) 
 
 ----
 ### Tutorials
@@ -16,7 +16,7 @@ A Flappy Bird made using JavaScript
 * TBD
 
 ----
-### TODO
+### TODO List
 - [ ] add start buttom
 - [ ] add sound
 - [ ] instruction/tutorial

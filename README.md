@@ -1,6 +1,6 @@
 # Flappy Bird  :angel:
 
-A Flappy Bird made using JavaScript
+A Flappy Bird clone made using JavaScript
 
 ----
 ### [Click to Play online](https://chloeiii.github.io/FlappyBird/) 

@@ -4,11 +4,12 @@ A Flappy Bird clone made using JavaScript
 
 ----
 ### [Click to Play online](https://chloeiii.github.io/FlappyBird/) 
-
+Play with any key and/or cursor
 ----
 ### Tutorials
 * [HTML Game Tutorial](https://www.w3schools.com/graphics/game_intro.asp)
 * [Canvas Tutorial](https://www.w3schools.com/graphics/canvas_intro.asp)
+* [Make flappy bird using Phaser](http://www.lessmilk.com/tutorial/flappy-bird-phaser-1)
 
 ----
 ### Screenshot
@@ -16,13 +17,16 @@ A Flappy Bird clone made using JavaScript
 
 ----
 ### TODO List
+- [x] full screen the game
+- [x] change cursor
+- [x] add land
 - [ ] add start buttom
 - [ ] add sound
 - [ ] instruction/tutorial
 - [ ] redesign obstacles
 - [ ] gameover scorecard
 - [ ] redesign score
-- [ ] play with mouse 
+- [x] play with mouse 
 
 ----
 ### Notes

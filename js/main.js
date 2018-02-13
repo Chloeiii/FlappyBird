@@ -8,24 +8,40 @@ var gameover;
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
-        this.canvas.width = 350;
-        this.canvas.height = 500;
+        //set the canvas to fullscreen
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0; //a property for counting frames
-        this.interval = setInterval(updateGameArea, 10);//run this function every 20th millisecond
+        this.interval = setInterval(updateGameArea, 6);//run this function every 20th millisecond
         window.addEventListener('keydown', function (e) {
             myGameArea.keys = (myGameArea.keys || []);
             myGameArea.keys[e.keyCode] = true;
-            myGamePiece.width = 40;
-            myGamePiece.height = 40;
+            myGamePiece.width = 65;
+            myGamePiece.height = 65;
             myGamePiece.image.src = "img/bird2.png";
-            accelerate(-0.05);
+            accelerate(-0.2);
         })
         window.addEventListener('keyup', function (e) {
             myGameArea.keys[e.keyCode] = false; 
-            myGamePiece.width = 45;
-            myGamePiece.height = 45;
+            myGamePiece.width = 70;
+            myGamePiece.height = 70;
+            myGamePiece.image.src = "img/bird1.png";
+            accelerate(0.05);
+        })
+        window.addEventListener('mousedown', function (e) {
+            myGameArea.keys = (myGameArea.keys || []);
+            myGameArea.keys[e.keyCode] = true;
+            myGamePiece.width = 65;
+            myGamePiece.height = 65;
+            myGamePiece.image.src = "img/bird2.png";
+            accelerate(-0.2);
+        })
+        window.addEventListener('mouseup', function (e) {
+            myGameArea.keys[e.keyCode] = false; 
+            myGamePiece.width = 70;
+            myGamePiece.height = 70;
             myGamePiece.image.src = "img/bird1.png";
             accelerate(0.05);
         })
@@ -40,10 +56,11 @@ var myGameArea = {
 
 //--------------------------------------------------functions-------------------------------------------------
 function startGame() {
-    myGamePiece = new component(45, 45, "img/bird1.png", 10, 10, "image");
+    myGamePiece = new component(70, 70, "img/bird1.png", 750, 245, "image");
     myScore = new component("18px", "Consolas", "black", 250, 20, "text");
-    myBackground = new component(800, 520, "img/background.png", 0, 0, "background");
-    gameover = new component(100, 100, "img/gameover.png", 120, 200, "image");
+    myLand = new component(400, 170, "img/land.png", 0, 800, "land");
+    myBackground = new component(1500, 810, "img/background.png", 0, 0, "background");
+    gameover = new component(160, 160, "img/gameover.png", 700, 300, "image");
     myGameArea.start();
 }
 
@@ -55,7 +72,7 @@ function component(width, height, color, x, y, type) {
     this.y = y;
 
     this.type = type;
-    if (type == "image" || type == "background") {
+    if (type == "image" || type == "background" || type == "land") {
         this.image = new Image();
         this.image.src = color;
     }
@@ -68,23 +85,8 @@ function component(width, height, color, x, y, type) {
 
     this.bounce = 0.4;
 
-    this.update = function(){
-        ctx = myGameArea.context;
-        if(type == 'text'){
-            ctx.font = this.width + " " + this.height;
-            ctx.fillStyle = color;
-            ctx.fillText(this.text, this.x, this.y);
-        }else if (type == 'image' || type == 'background'){
-            ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-            if(type == 'background'){
-                ctx.drawImage(this.image, this.x + this.width, this.y, this.width, this.height);
-            }                  
-        }else{
-            ctx.fillStyle = color;
-            ctx.fillRect(this.x, this.y, this.width, this.height);                    
-        }
-    }
 
+    //set new position
     this.newPos = function(){
         if(this.type == "image"){
             this.gravitySpeed += this.gravity;
@@ -92,7 +94,7 @@ function component(width, height, color, x, y, type) {
             this.y += this.speedY + this.gravitySpeed;  
             this.hitTop();
             this.hitBottom();
-        }else if (this.type == "background"){
+        }else if ((this.type == "background") || (this.type == "land")){
             this.x += this.speedX;
             this.y += this.speedY;    
             if(this.x == -(this.width)){
@@ -103,6 +105,36 @@ function component(width, height, color, x, y, type) {
             this.y += this.speedY;                    
         }
     }
+
+
+
+    //draw image and fill text
+    this.update = function(){
+        ctx = myGameArea.context;
+        if(type == 'text'){
+            ctx.font = this.width + " " + this.height;
+            ctx.fillStyle = color;
+            ctx.fillText(this.text, this.x, this.y);
+        }else if (type == 'image'){
+            ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        }else if(type == 'background'){
+            ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+            ctx.drawImage(this.image, this.x + this.width, this.y, this.width, this.height);
+            ctx.drawImage(this.image, this.x + this.width*2, this.y, this.width, this.height);
+        }else if (type == 'land'){
+            ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+            ctx.drawImage(this.image, this.x + this.width, this.y, this.width, this.height);
+            ctx.drawImage(this.image, this.x + this.width*2, this.y, this.width, this.height);
+            ctx.drawImage(this.image, this.x + this.width*3, this.y, this.width, this.height);
+            ctx.drawImage(this.image, this.x + this.width*4, this.y, this.width, this.height);
+            ctx.drawImage(this.image, this.x + this.width*5, this.y, this.width, this.height);
+
+        }else{
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.width, this.height);                    
+        }
+    }
+
 
     this.crashWith = function(otherobj){
         var myleft = this.x;
@@ -131,12 +163,13 @@ function component(width, height, color, x, y, type) {
     }
 
     this.hitBottom = function(){
-        var rockbottom = myGameArea.canvas.height - this.height;
+        var rockbottom = myGameArea.canvas.height - this.height - 150; 
         if (this.y > rockbottom) {
             this.y = rockbottom;
             this.gravitySpeed = -(this.gravitySpeed * this.bounce);
         }                
     }
+
 }
 
 function updateGameArea() {
@@ -149,21 +182,30 @@ function updateGameArea() {
         }
     }
     myGameArea.clear();
-    myBackground.speedX = -1;//moving background
+    //moving background
+    myBackground.speedX = -1;
     myBackground.newPos();
     myBackground.update();
+
+    //moving my land
+    myLand.speedX = -1;
+    myLand.newPos();
+    myLand.update();
+
     myGameArea.frameNo += 1;
-    if (myGameArea.frameNo == 2 || everyinterval(200)) {
+
+    //adding obstacles
+    if (myGameArea.frameNo == 2 || everyinterval(300)) {
         x = myGameArea.canvas.width;
         minHeight = 20;
         maxHeight = 300;
         height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight); //random obstacle height
-        minGap = 100;
-        maxGap = 400;
+        minGap = 600;
+        maxGap = 700;
         gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap); //random gap in between
         y = myGameArea.canvas.height;
-        myObstacles.push(new component(20, height, "green", x, 0));
-        myObstacles.push(new component(20, y - height - gap, "green", x, height + gap));
+        myObstacles.push(new component(40, height, "green", x, 0));
+        myObstacles.push(new component(40, y - height - gap, "green", x, height + gap));
     }           
     for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].x += -1;
@@ -175,6 +217,7 @@ function updateGameArea() {
     myScore.text="SCORE: " + Math.floor(myGameArea.frameNo/20);
     myScore.update();
 
+    //moving bird
     myGamePiece.newPos();
     myGamePiece.update();
 
@@ -190,3 +233,4 @@ function everyinterval(n){//this function returns true if the current framenumbe
 function accelerate(n){
     myGamePiece.gravity = n;
 }
+

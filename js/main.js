@@ -21,7 +21,8 @@ var myGameArea = {
             myGamePiece.width = 65;
             myGamePiece.height = 65;
             myGamePiece.image.src = "img/bird2.png";
-            accelerate(-0.2);
+            jump();
+            accelerate(0.05);
         })
         window.addEventListener('keyup', function (e) {
             myGameArea.keys[e.keyCode] = false; 
@@ -36,7 +37,8 @@ var myGameArea = {
             myGamePiece.width = 65;
             myGamePiece.height = 65;
             myGamePiece.image.src = "img/bird2.png";
-            accelerate(-0.2);
+            jump();
+            accelerate(0.05);
         })
         window.addEventListener('mouseup', function (e) {
             myGameArea.keys[e.keyCode] = false; 
@@ -57,7 +59,7 @@ var myGameArea = {
 //--------------------------------------------------functions-------------------------------------------------
 function startGame() {
     myGamePiece = new component(70, 70, "img/bird1.png", 750, 245, "image");
-    myScore = new component("18px", "Consolas", "black", 250, 20, "text");
+    myScore = new component("30px", "Consolas", "black", 1400, 50, "text");
     myLand = new component(400, 170, "img/land.png", 0, 800, "land");
     myBackground = new component(1500, 810, "img/background.png", 0, 0, "background");
     gameover = new component(160, 160, "img/gameover.png", 700, 300, "image");
@@ -72,7 +74,7 @@ function component(width, height, color, x, y, type) {
     this.y = y;
 
     this.type = type;
-    if (type == "image" || type == "background" || type == "land") {
+    if (type == "image" || type == "background" || type == "land") { //set image
         this.image = new Image();
         this.image.src = color;
     }
@@ -84,6 +86,8 @@ function component(width, height, color, x, y, type) {
     this.gravitySpeed = 0;
 
     this.bounce = 0.4;
+
+    this.angle = 0; //angle
 
 
     //set new position
@@ -128,7 +132,6 @@ function component(width, height, color, x, y, type) {
             ctx.drawImage(this.image, this.x + this.width*3, this.y, this.width, this.height);
             ctx.drawImage(this.image, this.x + this.width*4, this.y, this.width, this.height);
             ctx.drawImage(this.image, this.x + this.width*5, this.y, this.width, this.height);
-
         }else{
             ctx.fillStyle = color;
             ctx.fillRect(this.x, this.y, this.width, this.height);                    
@@ -197,15 +200,15 @@ function updateGameArea() {
     //adding obstacles
     if (myGameArea.frameNo == 2 || everyinterval(300)) {
         x = myGameArea.canvas.width;
-        minHeight = 20;
-        maxHeight = 300;
+        minHeight = 80;
+        maxHeight = 350;
         height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight); //random obstacle height
-        minGap = 600;
-        maxGap = 700;
+        minGap = 170;
+        maxGap = 350;
         gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap); //random gap in between
         y = myGameArea.canvas.height;
-        myObstacles.push(new component(40, height, "green", x, 0));
-        myObstacles.push(new component(40, y - height - gap, "green", x, height + gap));
+        myObstacles.push(new component(60, height, "img/top.png", x, 0, "image"));
+        myObstacles.push(new component(60, y - height - gap - 160, "img/bottom.png", x, height + gap,"image")); 
     }           
     for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].x += -1;
@@ -232,5 +235,9 @@ function everyinterval(n){//this function returns true if the current framenumbe
 
 function accelerate(n){
     myGamePiece.gravity = n;
+}
+
+function jump(){
+    myGamePiece.gravitySpeed = -2;
 }
 

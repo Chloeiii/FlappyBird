@@ -23,7 +23,7 @@ Play with any key and/or cursor
 - [ ] add start buttom
 - [ ] add sound
 - [ ] instruction/tutorial
-- [ ] redesign obstacles
+- [x] redesign obstacles
 - [ ] gameover scorecard
 - [ ] redesign score
 - [x] play with mouse 

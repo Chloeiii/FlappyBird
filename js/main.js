@@ -199,15 +199,17 @@ function updateGameArea() {
     //adding obstacles
     if (myGameArea.frameNo == 2 || everyinterval(300)) {
         x = myGameArea.canvas.width;
-        minHeight = 80;
-        maxHeight = 350;
+        minHeight = 40;
+        maxHeight = 300;
         height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight); //random obstacle height
         minGap = 170;
         maxGap = 300;
         gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap); //random gap in between
         y = myGameArea.canvas.height;
-        myObstacles.push(new component(60, height, "img/top.png", x, 0, "image"));
-        myObstacles.push(new component(60, y - height - gap - 150, "img/bottom.png", x, height + gap,"image")); 
+        myObstacles.push(new component(60, height, "img/pp.png", x, 0, "image"));
+        myObstacles.push(new component(70, 25, "img/head.png", x-5, height, "image"));
+        myObstacles.push(new component(70, 25, "img/head.png", x-5, height + gap, "image"));
+        myObstacles.push(new component(60, y - height - gap - 150 -25, "img/pp.png", x, height + gap +25,"image")); 
     }           
     for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].x += -1;

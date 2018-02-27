@@ -8,9 +8,8 @@ var gameover;
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
-        //set the canvas to fullscreen
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
+        this.canvas.width = 1400;
+        this.canvas.height =800;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0; //a property for counting frames
@@ -58,11 +57,11 @@ var myGameArea = {
 
 //--------------------------------------------------functions-------------------------------------------------
 function startGame() {
-    myGamePiece = new component(70, 70, "img/bird1.png", 750, 245, "image");
-    myScore = new component("30px", "Consolas", "black", 1400, 50, "text");
-    myLand = new component(400, 170, "img/land.png", 0, 800, "land");
-    myBackground = new component(1500, 810, "img/background.png", 0, 0, "background");
-    gameover = new component(160, 160, "img/gameover.png", 700, 300, "image");
+    myGamePiece = new component(70, 70, "img/bird1.png", 700, 245, "image");
+    myScore = new component("30px", "Consolas", "black", 1200, 50, "text");
+    myLand = new component(400, 150, "img/land.png", 0, 650, "land");
+    myBackground = new component(1400, 660, "img/background.png", 0, 0, "background");
+    gameover = new component(140, 140, "img/gameover.png", 600, 300, "image");
     myGameArea.start();
 }
 
@@ -166,7 +165,7 @@ function component(width, height, color, x, y, type) {
     }
 
     this.hitBottom = function(){
-        var rockbottom = myGameArea.canvas.height - this.height - 150; 
+        var rockbottom = myGameArea.canvas.height - this.height - 140; 
         if (this.y > rockbottom) {
             this.y = rockbottom;
             this.gravitySpeed = -(this.gravitySpeed * this.bounce);
@@ -204,11 +203,11 @@ function updateGameArea() {
         maxHeight = 350;
         height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight); //random obstacle height
         minGap = 170;
-        maxGap = 350;
+        maxGap = 300;
         gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap); //random gap in between
         y = myGameArea.canvas.height;
         myObstacles.push(new component(60, height, "img/top.png", x, 0, "image"));
-        myObstacles.push(new component(60, y - height - gap - 160, "img/bottom.png", x, height + gap,"image")); 
+        myObstacles.push(new component(60, y - height - gap - 150, "img/bottom.png", x, height + gap,"image")); 
     }           
     for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].x += -1;

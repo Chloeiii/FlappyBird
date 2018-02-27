@@ -17,7 +17,6 @@ Play with any key and/or cursor
 
 ----
 ### TODO List
-- [x] full screen the game
 - [x] change cursor
 - [x] add land
 - [ ] add start buttom
